@@ -2,6 +2,14 @@
 /dist
 /node_modules
 
+#env file
+.env
+
+#orm config file
+ormconfig.json
+
+write-type-orm-config.ts
+
 # Logs
 logs
 *.log
