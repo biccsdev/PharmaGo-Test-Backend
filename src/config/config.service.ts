@@ -35,7 +35,7 @@ class ConfigService {
   }
 
   //This is a method that returns the TypeORM configuration options.
-  public getTypeOrmConfig() {
+  public getTypeOrmConfig(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
       host: this.getValue('POSTGRES_HOST'),
@@ -47,7 +47,7 @@ class ConfigService {
       entities: ['src/model/*.ts'],
       migrationsTableName: 'migration',
       migrations: ['src/migration/*.ts'],
-      cli: { migrationsDir: 'src/migration' },
+      // cli: { migrationsDir: 'src/migration' },
       ssl: this.isProduction(),
     };
   }
