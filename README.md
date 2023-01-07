@@ -1,73 +1,194 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Pharma Go Test Backend
 
-## Description
+This repository contains the codebase for the backend of the system. This project is written using NestJS,  Typescript and TypeORM for the connection with Postgres Database.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Deployment & Database Migrations
+
+## TypeORM
+
+TypeORM is an open source tool that provides an easy-to-use command line interface for interacting with a database. The following commands are used to work with TypeORM.
+
+## typeorm
+
+This command runs the TypeORM CLI, which allows you to run various commands to interact with a database. 
+
+## typeorm:run-migrations 
+
+This command runs the migrations defined in the `src/scripts/typeOrm.config.ts` file. Migrations are used to create or modify database tables or columns.
+
+## typeorm:generate-migration
+
+This command generates a new migration in the `src/migration/` directory. The name of the migration is specified by the `$npm_config_name` parameter.
+
+## typeorm:create-migration
+
+This command creates a new migration in the `src/migration/` directory. The name of the migration is specified by the `$npm_config_name` parameter.
+
+## typeorm:revert-migration
+
+This command reverts a migration in the `src/scripts/typeOrm.
+## To run data migrations
+``` bash
+"typeorm": "ts-node ./node_modules/typeorm/cli",
+"typeorm:run-migrations": "npm run typeorm migration:run -- -d src/scripts/typeOrm.config.ts",
+"typeorm:generate-migration": "npm run typeorm -- -d src/scripts/typeOrm.config.ts migration:generate src/migration/$npm_config_name",
+"typeorm:create-migration": "npm run typeorm -- migration:create src/migration/$npm_config_name",
+"typeorm:revert-migration": "npm run typeorm -- -d src/scripts/typeOrm.config.ts migration:revert"
+```
+## To run this project:
 
 ```bash
-$ npm install
+  npm run start:dev 
+  or
+  npm run start
 ```
 
-## Running the app
 
-```bash
-# development
-$ npm run start
+# API Reference
+## Authentication
+#### Register New User
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```http
+  POST /auth
 ```
 
-## Test
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `registerUserDto` | `RegisterUserDto` | **Required** |
 
-```bash
-# unit tests
-$ npm run test
+```
+RegisterUserDto {
+    name: string,
+    password: string,
+    confirmPassword: string,
+    email: string
+}
+```
+#### Login
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```http
+  GET /auth
 ```
 
-## Support
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `loginUserDto`      | `LoginUserDto` | **Required** |
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+LoginUserDto {
+    email: string
+    password: string,
+}
+```
+## User
+#### create
 
-## Stay in touch
+```http
+  POST /user
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `createUserDto` | `CreateUserDto` | **Required** |
 
-## License
+```
+CreateUserDto {
+    name: string,
+    password: string,
+    confirmPassword: string,
+    email: string
+}
+```
+#### List All
 
-Nest is [MIT licensed](LICENSE).
+```http
+  GET /user
+```
+returns all users in the database
+#### Find User
+
+```http
+  GET /user/:email
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required** |
+
+returns an user matching the email provided, if any.
+## Task
+#### create
+
+```http
+  POST /task
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `createTaskDto` | `CreateTaskDto` | **Required** |
+
+```
+CreateTaskDto {
+    taskName: string,
+}
+```
+#### List All
+
+```http
+  GET /task
+```
+returns a list with all the tasks stored in the database
+
+## Country
+#### Get Countries
+
+```http
+  GET /country
+```
+returns a list of all available Countries to fetch data from.
+
+#### Get Country Weather
+
+```http
+  GET /country/weather/:country
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `country` | `string` | **Required**.  Country available to retrieve data from |
+
+#### Get Countries
+
+```http
+  GET /country
+```
+returns a list of all available Countries to fetch data from.
+
+#### Get Country Timezones
+
+```http
+  GET /country/:country/timezones
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `country` | `string` | **Required**.  Country available to retrieve data from |
+
+returns the timezones form the passed country
+
+#### Get Timezone Current Time
+
+```http
+  GET /country/:country/currentTime
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `country` | `string` | **Required**.  TimeZone available to retrieve data from |
+
+returns the current time from the passed TimeZone
+
+
