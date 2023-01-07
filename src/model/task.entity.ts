@@ -5,7 +5,7 @@ export class TaskEntity {
   // Creates a primary column which value will be automatically generated with uuid.
   // Uuid is a unique string id, value will be automatically generated.
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column({ type: 'varchar' })
   taskName: string;
