@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from './config/config.service';
+import { AuthModule } from './modules/authentication/auth.module';
 import { CountryModule } from './modules/country/country.module';
 import { TaskModule } from './modules/task/task.module';
 import { UserController } from './modules/user/user.controller';
@@ -17,6 +18,7 @@ import { UserModule } from './modules/user/user.module';
     UserModule,
     TaskModule,
     CountryModule,
+    AuthModule,
   ],
   controllers: [UserController],
   providers: [],

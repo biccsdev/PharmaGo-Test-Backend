@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../model/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './create-user.dto';
+import { RegisterUserDto } from '../authentication/register-user.dto';
 
 //This decorator makes the class injectable for the module
 @Injectable()
@@ -15,7 +16,9 @@ export class UserService {
 
   //Creates a public async function that takes in a CreateUserDto parameter for standarization
   // and returns a promise of UserEntity if the user was created successfully
-  public async create(createUserDto: CreateUserDto): Promise<UserEntity> {
+  public async create(
+    createUserDto: CreateUserDto | RegisterUserDto,
+  ): Promise<UserEntity> {
     //Verifies if the passwords match, if so it creates the user
     if (createUserDto.password == createUserDto.confirmPassword) {
       //Maps the Dto's properties to a UserEntity object
@@ -51,9 +54,9 @@ export class UserService {
   //Creates a public async function that takes in a string parameter and returns a boolean promise
   public async exists(email: string): Promise<boolean> {
     //Create a variable that holds a UserEntity that is found by the specified email
-    const user = this.repo.findOne({ where: { email: email } });
+    const user = await this.repo.findOne({ where: { email: email } });
     //Checks whether a user was found or not
-    if (user) {
+    if (user != null) {
       //If the user was found returns true
       return true;
     }
