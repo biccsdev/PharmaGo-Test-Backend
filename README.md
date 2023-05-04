@@ -1,36 +1,62 @@
+# PharmaGO - BackEnd
 
+## Description
 
-# Pharma Go Test Backend
+The proyect was built as a part of a Job Interview process, a document with a set of requirements and use case was presented to me, in order to solve the problem presented in the document, I designed and developed the solution which you will be able to find in this Repository.
 
 This repository contains the codebase for the backend of the system. This project is written using NestJS,  Typescript and TypeORM for the connection with Postgres Database.
+
+## Table of Contents
+
+- [Installation](#Installation)
+- [Commands info](#Deployment&DatabaseMigrations)
+- [Run migrations](#RunDataMigrations)
+- [Run project](#RunProject)
+- [API Reference](#APIReference)
+    - [Authentication](#Authentication)
+    - [User](#User)
+    - [User](#Task)
+    - [Country](#Country)
+
+
 
 
 ## Deployment & Database Migrations
 
-## TypeORM
+### Installation
+In order to clone succesfully this repo you will need to run the following commands:
+```
+git clone https://github.com/biccsdev/PharmaGo-Test-Backend.git
+cd repoName
+npm install
+npm run start:watch
+```
+
+
+### TypeORM
 
 TypeORM is an open source tool that provides an easy-to-use command line interface for interacting with a database. The following commands are used to work with TypeORM.
 
-## typeorm
+### typeorm
 
 This command runs the TypeORM CLI, which allows you to run various commands to interact with a database. 
 
-## typeorm:run-migrations 
+### typeorm:run-migrations 
 
 This command runs the migrations defined in the `src/scripts/typeOrm.config.ts` file. Migrations are used to create or modify database tables or columns.
 
-## typeorm:generate-migration
+### typeorm:generate-migration
 
 This command generates a new migration in the `src/migration/` directory. The name of the migration is specified by the `$npm_config_name` parameter.
 
-## typeorm:create-migration
+### typeorm:create-migration
 
 This command creates a new migration in the `src/migration/` directory. The name of the migration is specified by the `$npm_config_name` parameter.
 
-## typeorm:revert-migration
+### typeorm:revert-migration
 
-This command reverts a migration in the `src/scripts/typeOrm.
-## To run data migrations
+This command reverts a migration in the `src/scripts/typeOrm`.
+# Run Data Migrations
 ``` bash
 "typeorm": "ts-node ./node_modules/typeorm/cli",
 "typeorm:run-migrations": "npm run typeorm migration:run -- -d src/scripts/typeOrm.config.ts",
@@ -38,7 +64,7 @@ This command reverts a migration in the `src/scripts/typeOrm.
 "typeorm:create-migration": "npm run typeorm -- migration:create src/migration/$npm_config_name",
 "typeorm:revert-migration": "npm run typeorm -- -d src/scripts/typeOrm.config.ts migration:revert"
 ```
-## To run this project:
+# Run Project
 
 ```bash
   npm run start:dev 
@@ -190,5 +216,3 @@ returns the timezones form the passed country
 | `country` | `string` | **Required**.  TimeZone available to retrieve data from |
 
 returns the current time from the passed TimeZone
-
-
